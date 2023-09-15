@@ -39,3 +39,21 @@ const cardsArray = [
     { name: "dog", image: "assets/img/dog.png" },
     { name: "cat", image: "assets/img/cat.png" },
 ];
+
+// Event listener to show the instructions modal
+instructionButton.addEventListener("click", () => {
+    instructionModal.style.display = "block";
+    overlay.classList.add("active");
+});
+
+// Event listener to close the instructions modal
+closeModalButton.addEventListener("click", () => {
+    instructionModal.style.display = "none";
+    overlay.classList.remove("active");
+});
+
+// Event listener to show the user input modal
+startButton.addEventListener("click", () => {
+    userNameModal.style.display = "block";
+    overlay.classList.add("active");
+});
