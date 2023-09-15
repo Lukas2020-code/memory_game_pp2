@@ -37,14 +37,14 @@ const cardsArray = [
     { name: "cow", image: "assets/img/cow.png" },
     { name: "tiger", image: "assets/img/tiger.png" },
     { name: "dog", image: "assets/img/dog.png" },
-    { name: "cat", image: "assets/img/cat.png" },
+    { name: "cat", image: "../img/cat.png" },
 ];
 
-// Event listener to show the instructions modal
-// instructionButton.addEventListener("click", () => {
-//     instructionModal.style.display = "block";
-//     overlay.classList.add("active");
-// });
+function helloWorld() {
+    console.log("hello world");
+}
+
+console.log(cardsArray);
 
 instructionButton.addEventListener('click', function () {
     instructionModal.style.display = "block";
@@ -52,13 +52,13 @@ instructionButton.addEventListener('click', function () {
 });
 
 // Event listener to close the instructions modal
-closeModalButton.addEventListener("click", function() {
+closeModalButton.addEventListener("click", function () {
     instructionModal.style.display = "none";
     overlay.classList.remove("active");
 });
 
 // Event listener to show the user input modal
-startButton.addEventListener("click", function() {
+startButton.addEventListener("click", function () {
     userNameModal.style.display = "block";
     overlay.classList.add("active");
 });
