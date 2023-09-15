@@ -41,19 +41,24 @@ const cardsArray = [
 ];
 
 // Event listener to show the instructions modal
-instructionButton.addEventListener("click", () => {
+// instructionButton.addEventListener("click", () => {
+//     instructionModal.style.display = "block";
+//     overlay.classList.add("active");
+// });
+
+instructionButton.addEventListener('click', function () {
     instructionModal.style.display = "block";
     overlay.classList.add("active");
 });
 
 // Event listener to close the instructions modal
-closeModalButton.addEventListener("click", () => {
+closeModalButton.addEventListener("click", function() {
     instructionModal.style.display = "none";
     overlay.classList.remove("active");
 });
 
 // Event listener to show the user input modal
-startButton.addEventListener("click", () => {
+startButton.addEventListener("click", function() {
     userNameModal.style.display = "block";
     overlay.classList.add("active");
 });
