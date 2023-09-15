@@ -8,7 +8,7 @@
 }
 
 body {
-    background-image: linear-gradient(to right, red, yellow);
+    background-image: linear-gradient(to right, rgba(255, 0, 0, 0.875), rgba(255, 255, 0, 0.875));
 }
 
 h1 {
@@ -34,6 +34,7 @@ h1 {
 
 .btn {
     font-size: 1.25rem;
+    background-color: #f2f2f2;
     border: 1px solid #000;
     border-radius: 20px;
     padding: 5px 10px;
@@ -48,7 +49,7 @@ h1 {
 
 .btn:hover,
 .btn:focus {
-    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.85);
     color: #fff;
     border: 1px solid #fff;
 }
@@ -173,7 +174,7 @@ h1 {
 .user-name-modal .input-box {
     width: 90%;
     padding: 3px 3px 3px 5px;
-    margin-top: 5px;
+    margin-top: 10px;
     font-size: 1.25rem;
 }
 
@@ -183,14 +184,11 @@ h1 {
     margin: 20px;
 }
 
-.user-button {
-    padding: 10px 20px;
-    background: none;
-}
-
 #play-button {
     background-color: rgba(0, 128, 0, 0.7);
-    color: #fff
+    color: #fff;
+    font-size: 18px;
+    padding: 5px 15px;
 }
 
 #play-button:hover,
@@ -203,6 +201,8 @@ h1 {
 #cancel-button {
     background-color: rgba(255, 0, 0, 0.7);
     color: #fff;
+    font-size: 18px;
+    padding: 5px 10px;
 }
 
 #cancel-button:hover,
@@ -221,4 +221,56 @@ h1 {
     background-color: rgba(0, 0, 0, 0.8);
     opacity: 0;
     pointer-events: none;
+}
+
+#overlay.active {
+    pointer-events: all;
+    opacity: 1;
+}
+
+.user-scores {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    max-width: 80%;
+    margin: auto;
+    border: 2px solid #000;
+    border-radius: 20px;
+    background-color: #f2f2f2;
+}
+
+.user-scores-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px;
+}
+
+#start-again {
+    background-color: rgba(0, 128, 0, 0.7);
+    color: #fff;
+    font-size: 18px;
+    padding: 5px 15px;
+}
+
+#start-again:hover,
+#start-again:focus {
+    background-color: green;
+    color: #000;
+    border: 2px solid #000;
+}
+
+#exit-game {
+    background-color: rgba(255, 0, 0, 0.7);
+    color: #fff;
+    font-size: 18px;
+    padding: 5px 15px;
+}
+
+#exit-game:hover,
+#exit-game:focus {
+    background-color: rgb(255, 0, 0);
+    color: #000;
+    border: 2px solid #000;
 }
