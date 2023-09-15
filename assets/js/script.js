@@ -40,12 +40,6 @@ const cardsArray = [
     { name: "cat", image: "../img/cat.png" },
 ];
 
-function helloWorld() {
-    console.log("hello world");
-}
-
-console.log(cardsArray);
-
 instructionButton.addEventListener('click', function () {
     instructionModal.style.display = "block";
     overlay.classList.add("active");
