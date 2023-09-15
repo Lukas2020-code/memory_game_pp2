@@ -106,7 +106,7 @@ h1 {
 
 /* instruction modal */
 .instruction-modal {
-    display: block;
+    display: none;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -148,4 +148,77 @@ h1 {
 
 .instruction-rules li {
     padding-bottom: 5px;
+}
+
+/* User Input Modal */
+.user-name-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #000;
+    border-radius: 20px;
+    background-color: #fff;
+    z-index: 10;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.user-name-modal p {
+    padding: 20px 20px 10px;
+    font-size: 1.5rem;
+}
+
+.user-name-modal .input-box {
+    width: 90%;
+    padding: 3px 3px 3px 5px;
+    margin-top: 5px;
+    font-size: 1.25rem;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.user-button {
+    padding: 10px 20px;
+    background: none;
+}
+
+#play-button {
+    background-color: rgba(0, 128, 0, 0.7);
+    color: #fff
+}
+
+#play-button:hover,
+#play-button:focus {
+    background-color: green;
+    color: #000;
+    border: 2px solid #000;
+}
+
+#cancel-button {
+    background-color: rgba(255, 0, 0, 0.7);
+    color: #fff;
+}
+
+#cancel-button:hover,
+#cancel-button:focus {
+    background-color: rgb(255, 0, 0);
+    color: #000;
+    border: 2px solid #000;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    pointer-events: none;
 }
