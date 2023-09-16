@@ -26,6 +26,21 @@ h1 {
     text-align: center;
 }
 
+.welcome-message {
+    display: flex;
+    align-items: center;
+}
+
+.icon-left {
+    margin-right: 10px;
+    /* Adjust the margin as needed */
+}
+
+.icon-right {
+    margin-left: 10px;
+    /* Adjust the margin as needed */
+}
+
 .startGame {
     display: flex;
     flex-direction: column;
@@ -254,8 +269,6 @@ h1 {
     color: #fff;
     font-size: 18px;
     padding: 5px 15px;
-    border: 1px solid #000;
-    border-radius: 20px;
 }
 
 #start-again:hover,
@@ -270,8 +283,6 @@ h1 {
     color: #fff;
     font-size: 18px;
     padding: 5px 15px;
-    border: 1px solid #000;
-    border-radius: 20px;
 }
 
 #exit-game:hover,

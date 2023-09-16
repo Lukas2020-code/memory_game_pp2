@@ -40,6 +40,47 @@ const cardsArray = [
     { name: "cat", image: "../img/cat.png" },
 ];
 
+// sort the cardArray randomly
+cardsArray.sort(() => 0.5 - Math.random());
+
+// read the user's name from input field;
+function userInput() {
+    let userNameValue = userNameInput.value;
+    userName.innerHTML = `<span>Hi</span> ${userNameValue}`;
+}
+
+//initial the moves count and wins count
+let movesCount = 0,
+    winsCount = 0;
+
+//create a function to count the user moves
+function countingMoves() {
+    movesCount += 1;
+    userMoves.innerHTML = `<span>Moves: </span> ${movesCount}`;
+}
+
+//initial the time
+let seconds = 0,
+    minutes = 0;
+
+//create a function to count the time when the game start
+function timer() {
+    seconds += 1;
+    // for minutes
+    if ((seconds = 60)) {
+        minutes += 1;
+        seconds = 0;
+    }
+    //displaying the time
+    let secondsDisplay = seconds < 10 ? `0${seconds}` : seconds;
+
+    let minutesDisplay = minutes < 10 ? `0${minutes}` : minutes;
+
+    timeValue.innerHTML = `<span>Time:</span> ${minutesDisplay}:${secondsDisplay}`;
+}
+
+
+
 instructionButton.addEventListener('click', function () {
     instructionModal.style.display = "block";
     overlay.classList.add("active");
@@ -55,4 +96,24 @@ closeModalButton.addEventListener("click", function () {
 startButton.addEventListener("click", function () {
     userNameModal.style.display = "block";
     overlay.classList.add("active");
+});
+
+// Event listener to start the game and handle user input
+playButton.addEventListener("click", function () {
+    //create variable to store user name
+    const userName = userNameInput.value.trim();
+
+    if (userName !== "") {
+        // Close the user input modal
+        userNameModal.style.display = "none";
+        overlay.classList.remove("active");
+
+        //start the game goes here
+
+
+        //and remove the listener from play button
+        playButton.removeEventListener("click", () => { });
+    } else {
+        alert("Please provide a username to start the gamne!");
+    }
 });
