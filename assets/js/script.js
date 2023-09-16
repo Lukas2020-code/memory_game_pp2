@@ -79,6 +79,26 @@ function timer() {
     timeValue.innerHTML = `<span>Time:</span> ${minutesDisplay}:${secondsDisplay}`;
 }
 
+//create a game grid
+function createGameGrid() {
+    //loop over the cardsArray
+    for (let i = 0; i < cardsArray.length; i++) {
+        //create an img element
+        const card = document.createElement("img");
+        //add class attribute of game-card
+        card.classList.add("game-card");
+        //set source attribute and assing the image source from cardsArray into it
+        card.setAttribute("src", "assets/img/cardCover.jpg");
+        //as well as set the card id attribute
+        card.setAttribute("card-id", i);
+        //and add a event listener for card to be flip when the user click on card
+        card.addEventListener("click", flipCard);
+        //add all the cards to gameGrid
+        gameGrid.appendChild(card);
+    }
+}
+
+
 
 
 instructionButton.addEventListener('click', function () {
