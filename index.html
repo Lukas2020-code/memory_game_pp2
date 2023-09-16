@@ -1,75 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Memory Game</title>
     <!-- link css file -->
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
     <!-- Game container -->
     <div class="container">
-        <div class="welcome-message">
-            <h1>Animal <br>Memory Game</h1>
+      <div class="welcome-message">
+        <img src="assets/icons/lion.png" alt="Lion Icon" />
+        <h1>Animal 
+            <img src="assets/icons/dog.png" alt="Dog Icon"> <br />Memory Game</h1>
+      </div>
+      <div class="startGame">
+        <button class="btn start-button" id="instruction-button">
+          Instructions
+        </button>
+        <button class="btn start-button" id="start-button">
+          &gt;&gt; Let's Play &lt;&lt;
+        </button>
+      </div>
+      <div class="game-content">
+        <div class="user-information">
+          <div id="userName"></div>
+          <div class="user-statisctics">
+            <div id="userMoves"></div>
+            <div id="timer"></div>
+          </div>
         </div>
-        <div class="startGame">
-            <button class="btn start-button" id="instruction-button">Instructions</button>
-            <button class="btn start-button" id="start-button">&gt;&gt; Let's Play &lt;&lt;</button>
-        </div>
-        <div class="game-content">
-            <div class="user-information">
-                <div id="userName"></div>
-                <div class="user-statisctics">
-                    <div id="userMoves"></div>
-                    <div id="timer"></div>
-                </div>
-            </div>
-            <div id="game-container"></div>
-        </div>
+        <div id="game-container"></div>
+      </div>
     </div>
 
     <!-- Result container -->
     <div class="user-scores">
-        <div class="user-scores-buttons">
-            <button id="start-again" class="play-button">Start Again</button>
-            <button id="exit-game" class="">Exit Game</button>
-        </div>
+      <div class="user-scores-buttons">
+        <button id="start-again" class="play-button">Start Again</button>
+        <button id="exit-game" class="">Exit Game</button>
+      </div>
     </div>
 
     <!-- Instruction Modal -->
     <div id="instructionModal" class="instruction-modal">
-        <div class="modal-header">
-            <div class="modal-title">Instructions</div>
-            <button id="close-modal-button" class="modal-close">&times;</button>
-        </div>
-        <div class="modal-content">
-            <ol class="instruction-rules">
-                <li>Find matching cards on the board.</li>
-                <li>Try to do this as quickly as possible - time is counting!!!</li>
-                <li>Check who can discover all cards with fewer moves.</li>
-                <li>Beat your parent or your child.</li>
-                <li>And win the game!!!</li>
-            </ol>
-        </div>
+      <div class="modal-header">
+        <div class="modal-title">Instructions</div>
+        <button id="close-modal-button" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-content">
+        <ol class="instruction-rules">
+          <li>Find matching cards on the board.</li>
+          <li>Try to do this as quickly as possible - time is counting!!!</li>
+          <li>Check who can discover all cards with fewer moves.</li>
+          <li>Beat your parent or your child.</li>
+          <li>And win the game!!!</li>
+        </ol>
+      </div>
     </div>
 
     <!-- User Input Modal -->
     <div class="user-name-modal">
-        <p>Please enter your name:</p>
-        <input type="text" name="userName" class="input-box" id="userNameInput" placeholder="Username">
-        <div class="button-container">
-            <button class="btn user-button cancel-button" id="cancel-button">Cancel</button>
-            <button class="btn user-button play-button" id="play-button">Play</button>
-        </div>
+      <p>Please enter your name:</p>
+      <input
+        type="text"
+        name="userName"
+        class="input-box"
+        id="userNameInput"
+        placeholder="Username"
+      />
+      <div class="button-container">
+        <button class="btn user-button cancel-button" id="cancel-button">
+          Cancel
+        </button>
+        <button class="btn user-button play-button" id="play-button">
+          Play
+        </button>
+      </div>
     </div>
-    
+
     <div id="overlay"></div>
 
     <!-- link js file -->
     <script src="assets/js/script.js"></script>
-    
-</body>
+  </body>
 </html>
