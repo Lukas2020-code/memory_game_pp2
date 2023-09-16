@@ -73,7 +73,7 @@ h1 {
     display: none;
     width: 550px;
     /* max-width: 600px; */
-    height: 80%;
+    height: fit-content;
     background-color: #fff;
     border: 1px solid #000;
     border-radius: 20px;
@@ -99,6 +99,7 @@ h1 {
     border-bottom: 1px solid #000;
 }
 
+
 #game-container {
     position: relative;
     margin: 20px auto;
@@ -111,13 +112,14 @@ h1 {
 .game-card {
     width: 100px;
     height: 100px;
-    background-image: url("/assets/img/cardCover.jpg");
+    /* background-image: url("/assets/img/cardCover.jpg"); */
     background-position: right;
     background-size: cover;
     background-repeat: no-repeat;
     border: 2px solid #000;
     border-radius: 10px;
     cursor: pointer;
+    margin: 2px 5px;
 }
 
 /* instruction modal */
@@ -256,6 +258,12 @@ h1 {
     border: 2px solid #000;
     border-radius: 20px;
     background-color: #f2f2f2;
+    text-align: center;
+}
+
+.user-scores h2 {
+    font-size: 2rem;
+
 }
 
 .user-scores-buttons {

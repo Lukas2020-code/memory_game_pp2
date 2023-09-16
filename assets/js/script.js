@@ -14,7 +14,7 @@ const userNameInput = document.getElementById("userNameInput");
 const overlay = document.getElementById("overlay");
 
 /* Game */
-const gameGrid = document.getElementById("game-container");
+const gameGrid = document.querySelector(".game-content");
 const userName = document.getElementById("userName");
 const userMoves = document.getElementById("userMoves");
 const timeValue = document.getElementById("timer");
@@ -37,11 +37,8 @@ const cardsArray = [
     { name: "cow", image: "assets/img/cow.png" },
     { name: "tiger", image: "assets/img/tiger.png" },
     { name: "dog", image: "assets/img/dog.png" },
-    { name: "cat", image: "../img/cat.png" },
+    { name: "cat", image: "assets/img/cat.png" },
 ];
-
-// sort the cardArray randomly
-cardsArray.sort(() => 0.5 - Math.random());
 
 // read the user's name from input field;
 function userInput() {
@@ -50,8 +47,8 @@ function userInput() {
 }
 
 //initial the moves count and wins count
-let movesCount = 0,
-    winsCount = 0;
+let movesCount = 0;
+// winsCount = 0;
 
 //create a function to count the user moves
 function countingMoves() {
@@ -60,14 +57,14 @@ function countingMoves() {
 }
 
 //initial the time
-let seconds = 0,
-    minutes = 0;
+let seconds = 0, minutes = 0;
 
 //create a function to count the time when the game start
 function timer() {
+    let seconds = 0;
     seconds += 1;
     // for minutes
-    if ((seconds = 60)) {
+    if ((seconds === 60)) {
         minutes += 1;
         seconds = 0;
     }
@@ -81,6 +78,11 @@ function timer() {
 
 //create a game grid
 function createGameGrid() {
+    userInput();
+    countingMoves();
+
+    // sort the cardArray randomly
+    cardsArray.sort(() => 0.5 - Math.random());
     //loop over the cardsArray
     for (let i = 0; i < cardsArray.length; i++) {
         //create an img element
@@ -109,8 +111,10 @@ let wonCards = [];
 //create a flag for starting the game
 let gameStarted = false;
 
+
 //create a function to flip the cards
 function flipCard() {
+
     if (gameStarted) {
         const cardId = this.getAttribute("card-id");
         //add a chosen card to an empty array
@@ -128,9 +132,8 @@ function flipCard() {
         if (movesCount === 0 && seconds == 0 && minutes === 0) {
             //timer starts
             setInterval(timer, 1000);
+            countingMoves();
         }
-        userInput();
-        countingMoves();
     }
 }
 
@@ -142,7 +145,6 @@ function checkCards() {
     const card2 = idsOfChoosedCards[1];
 
     if (choosedCard[0] == choosedCard[1]) {
-        // alert("You found a match");
         //removed the event listener from cards if they match
         cards[card1].removeEventListener("click", flipCard);
         cards[card2].removeEventListener("click", flipCard);
@@ -155,18 +157,36 @@ function checkCards() {
         // and add the moves
         countingMoves();
     }
+
     choosedCard = [];
     idsOfChoosedCards = [];
 
     if (wonCards.length == cardsArray.length / 2) {
+        timer.stop();
         displayUserScores();
         gameGrid.style.display = "none";
     }
 }
 
+//create a function to show the user-scores
+function displayUserScores() {
+    const timeString = `${minutes < 10 ? "0" : ""}${minutes}:${seconds < 10 ? "0" : ""
+        }${seconds}`;
 
+    userScores.innerHTML = `
+        <h2>You won!!!</h2>
+        <p>Moves: ${movesCount}</p> 
+        <p>Time: ${timeString}</p>
+        <div class="user-scores-buttons">
+            <button id="start-again" class="play-button">Start Again</button>
+            <button id="exit-game">Exit Game</button>
+         </div>`;
 
+    userScores.style.display = "block";
 
+    startAgainButton.addEventListener("click", startAgain);
+    exitGameButton.addEventListener("click", exitGame);
+}
 
 // Define a function to start the game
 function startAgain() {
@@ -181,9 +201,6 @@ function startAgain() {
 
     // Clear the game grid
     gameGrid.innerHTML = "";
-
-    // Shuffle the cards
-    cardsArray.sort(() => 0.5 - Math.random());
 
     // Create a new game grid
     createGameGrid();
@@ -201,7 +218,7 @@ function exitGame() {
     //back to the home page
     window.location.href = "index.html";
 }
-
+//Event listener to 
 instructionButton.addEventListener('click', function () {
     instructionModal.style.display = "block";
     overlay.classList.add("active");
@@ -225,15 +242,20 @@ playButton.addEventListener("click", function () {
     const userName = userNameInput.value.trim();
 
     if (userName !== "") {
+        console.log(userName);
         // Close the user input modal
         userNameModal.style.display = "none";
         overlay.classList.remove("active");
 
         //start the game goes here
-
+        gameStarted = true;
+        createGameGrid();
+        gameGrid.style.display = "block";
 
         //and remove the listener from play button
         playButton.removeEventListener("click", () => { });
+        userNameInput = "";
+
     } else {
         alert("Please provide a username to start the gamne!");
     }
