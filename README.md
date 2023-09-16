@@ -4,7 +4,7 @@ The Animal Memory Game is fun and challenging game not only for childre but also
 
 This game teaches spatial imagination as well as memory. You have to find matching cards as fast as you can cause the time is counting.
 
-This game ...
+This game still have several issues which I will work on it
 
-Working process.
+It's still working process.
 
