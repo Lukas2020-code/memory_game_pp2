@@ -19,6 +19,7 @@ const userName = document.getElementById("userName");
 const userMoves = document.getElementById("userMoves");
 const timeValue = document.getElementById("timer");
 const userScores = document.querySelector(".user-scores");
+let timerInterval = null;
 
 //Array of card objects
 const cardsArray = [
@@ -52,8 +53,8 @@ let movesCount = 0;
 
 //create a function to count the user moves
 function countingMoves() {
-    movesCount += 1;
     userMoves.innerHTML = `<span>Moves: </span> ${movesCount}`;
+    movesCount += 1;
 }
 
 //initial the time
@@ -61,7 +62,6 @@ let seconds = 0, minutes = 0;
 
 //create a function to count the time when the game start
 function timer() {
-    let seconds = 0;
     seconds += 1;
     // for minutes
     if ((seconds === 60)) {
@@ -100,7 +100,7 @@ function createGameGrid() {
     }
 }
 
-//create an empty array to store the user choosen card
+//create an empty array to store the user choosed card
 let choosedCard = [];
 
 //create array of choosed cards id's
@@ -116,6 +116,11 @@ let gameStarted = false;
 function flipCard() {
 
     if (gameStarted) {
+        //start the timer
+        if (timerInterval === null) {
+            timerInterval = setInterval(timer, 1000);
+        }
+        //create variable to add attribute of card-id to the game-card
         const cardId = this.getAttribute("card-id");
         //add a chosen card to an empty array
         choosedCard.push(cardsArray[cardId].name);
@@ -124,15 +129,8 @@ function flipCard() {
 
         this.setAttribute("src", cardsArray[cardId].image);
         if (choosedCard.length === 2) {
-            //set a time of 5s for checking the cards
-            setTimeout(checkCards, 500);
-        }
-
-        //start to count moves and time when the user start the game
-        if (movesCount === 0 && seconds == 0 && minutes === 0) {
-            //timer starts
-            setInterval(timer, 1000);
-            countingMoves();
+            //set a time of 3s for checking the cards
+            setTimeout(checkCards, 300);
         }
     }
 }
@@ -160,9 +158,10 @@ function checkCards() {
 
     choosedCard = [];
     idsOfChoosedCards = [];
-
+    //if 
     if (wonCards.length == cardsArray.length / 2) {
-        timer.stop();
+        clearInterval(timerInterval);
+        timerInterval = null;
         displayUserScores();
         gameGrid.style.display = "none";
     }
@@ -179,13 +178,10 @@ function displayUserScores() {
         <p>Time: ${timeString}</p>
         <div class="user-scores-buttons">
             <button id="start-again" class="play-button">Start Again</button>
-            <button id="exit-game">Exit Game</button>
+            <button id="exit-game" class="cancel-button">Exit Game</button>
          </div>`;
 
     userScores.style.display = "block";
-
-    startAgainButton.addEventListener("click", startAgain);
-    exitGameButton.addEventListener("click", exitGame);
 }
 
 // Define a function to start the game
@@ -214,11 +210,11 @@ function startAgain() {
 function exitGame() {
     //hide the scores modal
     userScores.style.display = "none";
-
     //back to the home page
     window.location.href = "index.html";
 }
-//Event listener to 
+
+//Event listener to open instruction modal
 instructionButton.addEventListener('click', function () {
     instructionModal.style.display = "block";
     overlay.classList.add("active");
@@ -234,6 +230,13 @@ closeModalButton.addEventListener("click", function () {
 startButton.addEventListener("click", function () {
     userNameModal.style.display = "block";
     overlay.classList.add("active");
+});
+
+// Event listener to closed the user input modal
+cancelButton.addEventListener("click", function () {
+    userNameModal.style.display = "none";
+    overlay.classList.remove("active");
+    userNameInput.value = "";
 });
 
 // Event listener to start the game and handle user input
@@ -254,9 +257,15 @@ playButton.addEventListener("click", function () {
 
         //and remove the listener from play button
         playButton.removeEventListener("click", () => { });
-        userNameInput = "";
+        userNameInput.value = "";
 
     } else {
         alert("Please provide a username to start the gamne!");
     }
 });
+
+//Event listener for start the game again
+startAgainButton.addEventListener("click", startAgain);
+
+//Event listener for exit the game
+exitGameButton.addEventListener("click", exitGame);
