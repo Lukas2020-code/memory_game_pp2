@@ -130,7 +130,7 @@ function flipCard() {
         this.setAttribute("src", cardsArray[cardId].image);
         if (choosedCard.length === 2) {
             //set a time of 3s for checking the cards
-            setTimeout(checkCards, 300);
+            setTimeout(checkCards, 500);
         }
     }
 }
