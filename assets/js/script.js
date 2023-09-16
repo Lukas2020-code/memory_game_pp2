@@ -134,8 +134,73 @@ function flipCard() {
     }
 }
 
+//create a function to check the fliped cards if the match
+function checkCards() {
+    //select the whole game grid for match
+    const cards = document.querySelectorAll("img");
+    const card1 = idsOfChoosedCards[0];
+    const card2 = idsOfChoosedCards[1];
+
+    if (choosedCard[0] == choosedCard[1]) {
+        // alert("You found a match");
+        //removed the event listener from cards if they match
+        cards[card1].removeEventListener("click", flipCard);
+        cards[card2].removeEventListener("click", flipCard);
+        // and add the cards to wonCards array
+        wonCards.push(checkCards);
+    } else {
+        //if they doesn't match flip the cards back again
+        cards[card1].setAttribute("src", "assets/img/cardCover.jpg");
+        cards[card2].setAttribute("src", "assets/img/cardCover.jpg");
+        // and add the moves
+        countingMoves();
+    }
+    choosedCard = [];
+    idsOfChoosedCards = [];
+
+    if (wonCards.length == cardsArray.length / 2) {
+        displayUserScores();
+        gameGrid.style.display = "none";
+    }
+}
 
 
+
+
+
+// Define a function to start the game
+function startAgain() {
+    // Reset game variables
+    movesCount = 0;
+    winsCount = 0;
+    seconds = 0;
+    minutes = 0;
+    choosedCard = [];
+    idsOfChoosedCards = [];
+    wonCards = [];
+
+    // Clear the game grid
+    gameGrid.innerHTML = "";
+
+    // Shuffle the cards
+    cardsArray.sort(() => 0.5 - Math.random());
+
+    // Create a new game grid
+    createGameGrid();
+
+    // Reset the display of user information
+    userMoves.innerHTML = "<span>Moves: </span> 0";
+    timeValue.innerHTML = "<span>Time:</span> 00:00";
+    userName.innerHTML = `<span>Hi</span> ${userNameValue}`;
+}
+
+function exitGame() {
+    //hide the scores modal
+    userScores.style.display = "none";
+
+    //back to the home page
+    window.location.href = "index.html";
+}
 
 instructionButton.addEventListener('click', function () {
     instructionModal.style.display = "block";
