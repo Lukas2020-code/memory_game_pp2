@@ -98,6 +98,42 @@ function createGameGrid() {
     }
 }
 
+//create an empty array to store the user choosen card
+let choosedCard = [];
+
+//create array of choosed cards id's
+let idsOfChoosedCards = [];
+
+//create an array to control the cards
+let wonCards = [];
+//create a flag for starting the game
+let gameStarted = false;
+
+//create a function to flip the cards
+function flipCard() {
+    if (gameStarted) {
+        const cardId = this.getAttribute("card-id");
+        //add a chosen card to an empty array
+        choosedCard.push(cardsArray[cardId].name);
+        //and a card's id to other empty array
+        idsOfChoosedCards.push(cardId);
+
+        this.setAttribute("src", cardsArray[cardId].image);
+        if (choosedCard.length === 2) {
+            //set a time of 5s for checking the cards
+            setTimeout(checkCards, 500);
+        }
+
+        //start to count moves and time when the user start the game
+        if (movesCount === 0 && seconds == 0 && minutes === 0) {
+            //timer starts
+            setInterval(timer, 1000);
+        }
+        userInput();
+        countingMoves();
+    }
+}
+
 
 
 
