@@ -41,6 +41,8 @@ const cardsArray = [
     { name: "cat", image: "assets/img/cat.png" },
 ];
 
+allowedClick = true;
+
 // read the user's name from input field;
 function userInput() {
     let userNameValue = userNameInput.value;
@@ -76,6 +78,32 @@ function timer() {
     timeValue.innerHTML = `<span>Time:</span> ${minutesDisplay}:${secondsDisplay}`;
 }
 
+//create a function to flip the cards
+function flipCard() {
+
+    if (gameStarted) {
+        if (allowedClick == true) {
+            //start the timer
+            if (timerInterval === null) {
+                timerInterval = setInterval(timer, 1000);
+            }
+            //create variable to add attribute of card-id to the game-card
+            const cardId = this.getAttribute("card-id");
+            //add a chosen card to an empty array
+            choosedCard.push(cardsArray[cardId].name);
+            //and a card's id to other empty array
+            idsOfChoosedCards.push(cardId);
+
+            this.setAttribute("src", cardsArray[cardId].image);
+            if (choosedCard.length === 2) {
+                //set a time of 2s for checking the cards
+                allowedClick = false;
+                setTimeout(checkCards, 2000);
+            }
+        }   
+    }
+}
+
 //create a game grid
 function createGameGrid() {
     userInput();
@@ -93,8 +121,12 @@ function createGameGrid() {
         card.setAttribute("src", "assets/img/cardCover.jpg");
         //as well as set the card id attribute
         card.setAttribute("card-id", i);
+
         //and add a event listener for card to be flip when the user click on card
         card.addEventListener("click", flipCard);
+
+        // //and add a event listener for card to be flip when the user click on card
+        // card.addEventListener("click", flipCard);
         //add all the cards to gameGrid
         gameGrid.appendChild(card);
     }
@@ -111,30 +143,6 @@ let wonCards = [];
 //create a flag for starting the game
 let gameStarted = false;
 
-
-//create a function to flip the cards
-function flipCard() {
-
-    if (gameStarted) {
-        //start the timer
-        if (timerInterval === null) {
-            timerInterval = setInterval(timer, 1000);
-        }
-        //create variable to add attribute of card-id to the game-card
-        const cardId = this.getAttribute("card-id");
-        //add a chosen card to an empty array
-        choosedCard.push(cardsArray[cardId].name);
-        //and a card's id to other empty array
-        idsOfChoosedCards.push(cardId);
-
-        this.setAttribute("src", cardsArray[cardId].image);
-        if (choosedCard.length === 2) {
-            //set a time of 3s for checking the cards
-            setTimeout(checkCards, 500);
-        }
-    }
-}
-
 //create a function to check the fliped cards if the match
 function checkCards() {
     //select the whole game grid for match
@@ -147,25 +155,29 @@ function checkCards() {
         cards[card1].removeEventListener("click", flipCard);
         cards[card2].removeEventListener("click", flipCard);
         // and add the cards to wonCards array
-        wonCards.push(checkCards);
+        wonCards.push(card1);       
+        wonCards.push(card2);
     } else {
         //if they doesn't match flip the cards back again
         cards[card1].setAttribute("src", "assets/img/cardCover.jpg");
         cards[card2].setAttribute("src", "assets/img/cardCover.jpg");
-        // and add the moves
-        countingMoves();
     }
+    // and add the moves
+    countingMoves();
+    allowedClick = true;
 
     choosedCard = [];
     idsOfChoosedCards = [];
     //if 
-    if (wonCards.length == cardsArray.length / 2) {
+    if (wonCards.length == cardsArray.length) {
         clearInterval(timerInterval);
         timerInterval = null;
         displayUserScores();
         gameGrid.style.display = "none";
     }
 }
+
+
 
 //create a function to show the user-scores
 function displayUserScores() {
@@ -265,7 +277,11 @@ playButton.addEventListener("click", function () {
 });
 
 //Event listener for start the game again
-startAgainButton.addEventListener("click", startAgain);
+// startAgainButton.addEventListener("click", startAgain);
+
+startAgainButton.addEventListener("click", function () {
+    startAgain();
+});
 
 //Event listener for exit the game
 exitGameButton.addEventListener("click", exitGame);
